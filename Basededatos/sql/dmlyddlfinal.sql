@@ -154,3 +154,4 @@ DELETE FROM ventas WHERE estado = 'Cancelada';
 
 USE tienda_zapas;
 SELECT * FROM clientes;
+-- Added indexes on foreign key columns
