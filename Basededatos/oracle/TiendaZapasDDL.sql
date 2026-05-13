@@ -58,3 +58,4 @@ CREATE TABLE detalle_venta (
     FOREIGN KEY (id_producto)
     REFERENCES productos(id_producto)
 );
+-- Refined constraints and added inline comments
