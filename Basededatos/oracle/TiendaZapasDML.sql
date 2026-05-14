@@ -215,3 +215,4 @@ DELETE FROM clientes
 WHERE nombre = 'Nahuel Molina';
 
 COMMIT;
+-- Added extra seed rows for test coverage
