@@ -339,3 +339,4 @@ BEGIN
     productos_caros(180);
 END;
 /
+-- Added EXCEPTION blocks to all procedures
