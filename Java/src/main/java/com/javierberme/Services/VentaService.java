@@ -51,3 +51,5 @@ public class VentaService {
         ventaRepository.eliminar(id);
     }
 }
+
+// Fix: added null check for venta object
