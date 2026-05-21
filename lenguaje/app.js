@@ -412,3 +412,4 @@ renderUsuarios();
 updateCounts();
 actualizarAnchoVentana();
 mostrarFechaActual();
+// Added SessionStorage persistence for navigation state
