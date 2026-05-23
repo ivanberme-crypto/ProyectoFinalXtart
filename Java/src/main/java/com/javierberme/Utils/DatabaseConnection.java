@@ -19,3 +19,5 @@ public class DatabaseConnection {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
+
+// Configuration: update host/port/user/password before running
