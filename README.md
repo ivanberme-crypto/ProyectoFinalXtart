@@ -1,34 +1,40 @@
-# ProyectoFinal CRM — Tienda de Zapas
+# ProyectoFinal CRM - Tienda de Zapas
 
-CRM application for a shoe store — final project for 1º DAM.
+Aplicacion CRM para una tienda de zapatillas - proyecto final de 1o DAM.
 
-## Modules
-- **Java** — Maven console app (OOP, JDBC, MySQL, layered architecture)
-- **Database** — Oracle (DDL, DML, PL/SQL) + MySQL migration
-- **Web** — Vanilla JS, HTML5, CSS3 (BEM), SessionStorage
+## Modulos
 
-## Prerequisites
-- Java 17+, Maven 3.8+
-- MySQL 8.x (for the Java app)
-- Oracle Database 21c XE (for PL/SQL scripts)
-- Any modern browser (for the web app)
+- **Java** - Aplicacion de consola Maven (POO, JDBC, MySQL, arquitectura por capas)
+- **Base de datos** - Oracle (DDL, DML, PL/SQL) + migracion MySQL
+- **Web** - JavaScript Vanilla, HTML5, CSS3 (BEM), SessionStorage
 
-## Setup — Java application
-1. Import `Basededatos/sql/dmlyddlfinal.sql` into your MySQL instance
-2. Edit `Java/src/main/java/com/javierberme/Utils/DatabaseConnection.java`:
-   - Set your MySQL `host`, `port`, `user` and `password`
+## Requisitos
+
+- Java 21+, Maven 3.8+
+- MySQL 8.x (para la aplicacion Java)
+- Oracle Database 21c XE (para los scripts PL/SQL)
+- Cualquier navegador moderno (para la aplicacion web)
+
+## Configuracion - Aplicacion Java
+
+1. Importa `Basededatos/sql/dmlyddlfinal.sql` en tu instancia MySQL
+2. Edita `Java/src/main/java/com/javierberme/Utils/DatabaseConnection.java`:
+   - Pon tu `host`, `puerto`, `usuario` y `contrasena` de MySQL
 3. `cd Java && mvn compile exec:java -Dexec.mainClass="com.javierberme.Interfaz.Main"`
 
-## Setup — Oracle database
-1. Connect to Oracle as SYSDBA
-2. Run `Basededatos/oracle/TiendaZapasDDL.sql`
-3. Run `Basededatos/oracle/TiendaZapasDML.sql`
-4. Run `Basededatos/oracle/TiendaZapasPLSQL.sql`
+## Configuracion - Base de datos Oracle
 
-## Setup — Web application
-1. Open `lenguaje/index.html` in any browser (no server needed)
-2. Data is stored in SessionStorage and resets on browser close
+1. Conectate a Oracle como SYSDBA
+2. Ejecuta `Basededatos/oracle/TiendaZapasDDL.sql`
+3. Ejecuta `Basededatos/oracle/TiendaZapasDML.sql`
+4. Ejecuta `Basededatos/oracle/TiendaZapasPLSQL.sql`
 
-## Authors
-- **berme_ivan** — bermevfx@gmail.com
-- **javiervega120** — javiervegatorres01@gmail.com
+## Configuracion - Aplicacion web
+
+1. Abre `lenguaje/index.html` en cualquier navegador (no necesita servidor)
+2. Los datos se guardan en SessionStorage y se borran al cerrar el navegador
+
+## Autores
+
+- **berme_ivan** - bermevfx@gmail.com
+- **javiervega120** - javiervegatorres01@gmail.com
