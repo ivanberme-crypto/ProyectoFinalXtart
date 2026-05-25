@@ -1,120 +1,227 @@
-# ProyectoFinal CRM — Tienda Zapas (ZAPNN)
+# ProyectoFinal CRM — Tienda ZAPNN
 
-Aplicación CRM completa para una tienda de zapatillas, desarrollada como *proyecto final de 1º DAM*. El sistema gestiona clientes, productos, ventas, usuarios y detalles de venta a través de tres módulos independientes pero conectados a la misma lógica de negocio.
+> CRM completo para una tienda de zapatillas, desarrollado como proyecto final de 1º DAM.  
+> Tres módulos independientes conectados a la misma lógica de negocio.
+
+![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
+![Maven](https://img.shields.io/badge/Maven-3.8+-red?logo=apachemaven)
+![MySQL](https://img.shields.io/badge/MySQL-8.x-blue?logo=mysql)
+![Oracle](https://img.shields.io/badge/Oracle-21c_XE-red?logo=oracle)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?logo=javascript)
 
 ---
 
-## Estructura del proyecto
+## Autores
 
-```text
-ProyectoFinalXtart/
-├── Java/                  → Aplicación de consola (Maven + JDBC + MySQL)
-│   └── src/main/java/com/javierberme/
-│       ├── Controllers/   → Capa de controladores
-│       ├── Entities/      → Entidades / modelos de datos
-│       ├── Interfaz/      → Menús de consola (Main, Menu, submenús)
-│       ├── Repositories/  → Acceso a datos (interfaces + implementaciones JDBC)
-│       ├── Services/      → Lógica de negocio
-│       └── Utils/         → DatabaseConnection, ExportadorCSV
-│
-├── Basededatos/
-│   ├── sql/
-│   │   └── dmlyddlfinal.sql       → DDL + DML para MySQL (usado por Java)
-│   └── oracle/
-│       ├── TiendaZapasDDL.sql     → DDL para Oracle
-│       ├── TiendaZapasDML.sql     → Datos iniciales para Oracle
-│       └── TiendaZapasPLSQL.sql   → Cursores, procedimientos y funciones PL/SQL
-│
-└── lenguaje/
-    ├── index.html         → SPA del CRM web
-    ├── style.css          → Estilos con metodología BEM
-    └── app.js             → Lógica completa en JavaScript Vanilla
+| Usuario | Email |
+|---------|-------|
+| berme_ivan | bermevfx@gmail.com |
+| javiervega120 | javiervegatorres01@gmail.com |
 
-Autores
-berme_ivan — bermevfx@gmail.com
+---
 
-javiervega120 — javiervegatorres01@gmail.com
+## Módulos del proyecto
 
-Módulos del proyecto
-Java — Java 21, Maven, JDBC, MySQL — Asignatura: Programación
+| Módulo | Tecnologías | Asignatura |
+|--------|-------------|------------|
+| **Java** | Java 21, Maven, JDBC, MySQL | Programación |
+| **Base de datos** | MySQL 8, Oracle 21c XE, PL/SQL | Bases de Datos |
+| **Web** | HTML5, CSS3 (BEM), JavaScript ES6+ | Lenguajes de Marcas |
 
-Base de datos — MySQL 8 + Oracle 21c XE + PL/SQL — Asignatura: Bases de Datos
+---
 
-Web — HTML5, CSS3 (BEM), JavaScript ES6+ — Asignatura: Lenguajes de Marcas
+## Módulo Java — Aplicación de consola
 
-MÓDULO JAVA — Aplicación de consola
-Descripción
-Aplicación de consola desarrollada en Java 21 con arquitectura en capas (Controller → Service → Repository → Entity). Se conecta a una base de datos MySQL mediante JDBC y permite gestionar de forma interactiva clientes, productos, ventas, usuarios y detalles de venta. También incluye exportación a CSV.
+Arquitectura en capas: `Interfaz → Controller → Service → Repository → MySQL`
 
-Arquitectura por capas
-Interfaz (menús de consola)
+### Entidades del modelo
 
-Controllers (coordinan la entrada/salida)
+`Cliente` · `Producto` · `Venta` · `DetalleVenta` · `Usuario`
 
-Services (lógica de negocio, validaciones)
+### Requisitos previos
 
-Repositories (interfaces + implementaciones JDBC)
+- Java 21+
+- Maven 3.8+
+- MySQL 8.x en ejecución
+- IntelliJ IDEA (recomendado)
 
-MySQL Database (via JDBC)
+### Configuración de MySQL
 
-Entidades del modelo
-Cliente — idCliente, nombre, email, telefono, direccion
+> [!IMPORTANT]
+> Los valores de MySQL Workbench **deben coincidir exactamente** con los de `DatabaseConnection.java`.
 
-Producto — idProducto, nombre, marca, modelo, talla, color, precio, stock, categoria
+```
+Hostname : localhost
+Port     : 3306
+Username : root
+Password : 1234
+Schema   : tienda_zapas
+```
 
-Venta — idVenta, idCliente, idUsuario, fecha, estado, total
+Si tu configuración es diferente, edita `Java/src/main/java/com/javierberme/Utils/DatabaseConnection.java`:
 
-DetalleVenta — idDetalle, idVenta, idProducto, cantidad, precioUnitario
+```java
+private static final String URL = "jdbc:mysql://localhost:3306/tienda_zapas"
+    + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+private static final String USER = "root";
+private static final String PASSWORD = "1234";
+```
 
-Usuario — idUsuario, nombre, email, rol, password_hash
+### Preparar la base de datos
 
-Requisitos previos
-Java 21 o superior
+```bash
+mysql -u root -p1234 < Basededatos/sql/dmlyddlfinal.sql
+```
 
-Maven 3.8 o superior
+O desde MySQL Workbench: `File → Open SQL Script → dmlyddlfinal.sql` → ejecutar con `Ctrl+Shift+Enter`.
 
-MySQL 8.x en ejecución
+Tablas creadas: `usuarios` · `clientes` · `productos` · `ventas` · `detalle_venta`
 
-MySQL Workbench (recomendado para preparar la base de datos)
+### Ejecutar la aplicación
 
-IntelliJ IDEA (o cualquier IDE con soporte Maven)
+**Opción A — IntelliJ IDEA**
 
-Configuración de MySQL Workbench
-CRÍTICO: Los valores de MySQL Workbench deben coincidir exactamente con los definidos en DatabaseConnection.java.
+Abrir carpeta `Java/` → ejecutar `Main.java` directamente.
 
-Paso 1 — Crear la conexión en MySQL Workbench
-Abre MySQL Workbench.
+**Opción B — Terminal**
 
-En la pantalla de inicio, haz clic en el símbolo + junto a "MySQL Connections".
+```bash
+cd Java/
+mvn compile
+mvn exec:java -Dexec.mainClass="com.javierberme.Interfaz.Main"
+```
 
-Rellena los campos con estos valores (son los mismos que usa Java):
+### Menú principal
 
-Connection Name: tienda_zapas (o el nombre que prefieras)
+```
+╔══════════════════════════╗
+║       TIENDA ZAPNN       ║
+╠══════════════════════════╣
+║ 1. Gestión de clientes   ║
+║ 2. Gestión de productos  ║
+║ 3. Gestión de ventas     ║
+║ 4. Gestión de usuarios   ║
+║ 5. Gestión de detalles   ║
+║ 0. Salir                 ║
+╚══════════════════════════╝
+```
 
-Hostname: localhost
+Cada opción abre un submenú con CRUD completo. El módulo de clientes incluye exportación a CSV.
 
-Port: 3306
+<details>
+<summary>Ver estructura de paquetes</summary>
 
-Username: root
+| Paquete | Descripción |
+|---------|-------------|
+| `Entities` | POJOs con getters/setters que representan las tablas |
+| `Repositories` | Interfaces + implementaciones JDBC con `PreparedStatement` |
+| `Services` | Lógica de negocio y validaciones |
+| `Controllers` | Recibe input del usuario y llama a los servicios |
+| `Interfaz` | `Main`, `Menu` y cinco submenús con `Scanner` |
+| `Utils` | `DatabaseConnection` (singleton) y `ExportadorCSV` |
 
-Password: 1234
+</details>
 
-Default Schema: tienda_zapas (opcional)
+---
 
-Pulsa "Test Connection" para verificar que funciona.
+## Módulo Base de datos
 
-Pulsa OK para guardar la conexión.
+### MySQL — `Basededatos/sql/dmlyddlfinal.sql`
 
-Paso 2 — Ejecutar el script SQL
-Una vez conectado, abre el archivo Basededatos/sql/dmlyddlfinal.sql desde Workbench:
+Script único con DDL + DML para MySQL 8. Incluye claves foráneas con `ON DELETE CASCADE` y datos de ejemplo.
 
-Menú File → Open SQL Script → selecciona el archivo.
+### Oracle — `Basededatos/oracle/`
 
-Pulsa el rayo (Execute All) o Ctrl+Shift+Enter para ejecutar todo el script.
+Scripts equivalentes para Oracle 21c XE con sintaxis propia (`NUMBER`, `VARCHAR2`, `SYSDATE`, `IDENTITY`).
 
-Esto creará la base de datos tienda_zapas, todas las tablas y cargará los datos de ejemplo.
+```sql
+-- En SQL*Plus:
+@TiendaZapasDDL.sql
+@TiendaZapasDML.sql
+@TiendaZapasPLSQL.sql
+```
 
-Verifica en el panel izquierdo que aparece el schema tienda_zapas con las tablas: usuarios, clientes, productos, ventas, detalle_venta.
+<details>
+<summary>Diferencias de sintaxis MySQL → Oracle</summary>
 
-Paso 3 — Verificar que Java usa la misma configuración
-El archivo de conexión Java es Java/src/main/java/com/javierberme/Utils/DatabaseConnection.java. Su contenido actual es:
+| MySQL | Oracle |
+|-------|--------|
+| `INT AUTO_INCREMENT` | `NUMBER GENERATED BY DEFAULT AS IDENTITY` |
+| `VARCHAR` | `VARCHAR2` |
+| `TIMESTAMP DEFAULT CURRENT_TIMESTAMP` | `DATE DEFAULT SYSDATE` |
+| `DECIMAL(10,2)` | `NUMBER(10,2)` |
+
+</details>
+
+### PL/SQL — `TiendaZapasPLSQL.sql`
+
+Cursores y bloques anónimos para: clientes, ventas por usuario, gasto total por cliente, análisis de stock…
+
+```sql
+SET SERVEROUTPUT ON;
+@TiendaZapasPLSQL.sql
+```
+
+---
+
+## Módulo Web — SPA en el navegador
+
+Sin servidor ni base de datos. Abre `lenguaje/index.html` directamente en el navegador.
+
+> [!NOTE]
+> Los datos se guardan en **SessionStorage**: persisten mientras la pestaña esté abierta, pero se borran al cerrarla. Es el comportamiento esperado.
+
+### Dashboard
+
+4 tarjetas en tiempo real: ventas completadas · stock total · clientes registrados · facturación acumulada.
+
+### Secciones CRUD
+
+`Clientes` · `Productos` · `Ventas` · `Detalle Ventas` · `Usuarios`
+
+<details>
+<summary>Datos de ejemplo precargados</summary>
+
+**Clientes:** Messi, Lamine Yamal, Mbappé, Bellingham, Vinicius Jr., Pedri, Lookman, Marc Pubill
+
+**Productos:** Nike Air Max Plus TN, Nike Shox TL, Nike P-6000, Nike Zoom Vomero 5, Adidas Yeezy Boost 350, New Balance 2002R, New Balance 530, Salomon ACS Pro, Jordan 1 High Chicago
+
+**Usuarios:** Javier Vega (Admin), Ivan Bermejo (Admin)
+
+</details>
+
+---
+
+## Solución de problemas
+
+<details>
+<summary>Java no conecta a MySQL</summary>
+
+- Comprueba que MySQL está corriendo: `mysql -u root -p1234`
+- Verifica que `DatabaseConnection.java` usa el mismo host, puerto, usuario y contraseña que Workbench
+- Confirma que la base de datos `tienda_zapas` existe (ejecuta el script SQL primero)
+
+</details>
+
+<details>
+<summary>Error al ejecutar el script SQL en Workbench</summary>
+
+- Ejecuta el script completo de una vez, no por fragmentos
+- El script incluye `DROP TABLE IF EXISTS` en orden inverso para evitar conflictos de claves foráneas
+
+</details>
+
+<details>
+<summary>La web no guarda los datos al recargar</summary>
+
+Comportamiento esperado. SessionStorage solo persiste en la misma sesión de pestaña. Para datos permanentes habría que migrar a `localStorage` o conectar a una API.
+
+</details>
+
+<details>
+<summary>Oracle: errores de usuario o esquema</summary>
+
+- Conéctate con un usuario que tenga permisos de creación de tablas
+- En Oracle XE, el esquema por defecto es el nombre del propio usuario (no `tienda_zapas`)
+
+</details>
