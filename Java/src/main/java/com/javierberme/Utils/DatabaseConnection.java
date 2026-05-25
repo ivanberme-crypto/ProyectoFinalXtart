@@ -20,4 +20,3 @@ public class DatabaseConnection {
     }
 }
 
-// Configuration: update host/port/user/password before running

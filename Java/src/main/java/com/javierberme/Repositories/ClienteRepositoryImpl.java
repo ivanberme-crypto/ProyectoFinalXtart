@@ -140,4 +140,3 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     }
 }
 
-// Improve: added try-catch for SQL exceptions

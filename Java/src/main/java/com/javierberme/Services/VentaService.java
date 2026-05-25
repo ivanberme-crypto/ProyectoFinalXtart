@@ -52,4 +52,3 @@ public class VentaService {
     }
 }
 
-// Fix: added null check for venta object
