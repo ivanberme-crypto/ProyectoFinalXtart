@@ -68,7 +68,7 @@ CREATE TABLE detalle_venta (
     CONSTRAINT pk_detalle_venta PRIMARY KEY (id_detalle),
     CONSTRAINT fk_detalle_venta_ventas FOREIGN KEY (id_venta) 
         REFERENCES ventas(id_venta) ON DELETE CASCADE,
-    CONSTRAINT fk_detalle_venta_productos FOREIGN KEY (id_prid_detalletelefonooducto) 
+    CONSTRAINT fk_detalle_venta_productos FOREIGN KEY (id_producto)
         REFERENCES productos(id_producto) ON DELETE RESTRICT
 );
 
@@ -125,13 +125,12 @@ UPDATE detalle_venta SET cantidad = 1 WHERE id_detalle = (
 );
 
 
-DELETE FROM clientes WHERE nombre LIKE 'Cliente Temp%';
-
+DELETE FROM detalle_venta WHERE id_producto IN (SELECT id_producto FROM productos WHERE categoria = 'Temporal');
 DELETE FROM productos WHERE categoria = 'Temporal';
-
-
 DELETE FROM ventas WHERE estado = 'Cancelada';
 
+
+DELETE FROM clientes WHERE nombre LIKE 'Cliente Temp%';
 
 USE tienda_zapas;
 SELECT * FROM clientes;
