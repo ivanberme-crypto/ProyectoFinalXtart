@@ -1,6 +1,3 @@
--- =========================
--- INSERTS CLIENTES
--- =========================
 
 INSERT INTO clientes (nombre, email, telefono, direccion)
 VALUES ('Messi', 'messi@gmail.com', '600111222', 'Madrid');
@@ -30,9 +27,6 @@ INSERT INTO clientes (nombre, email, telefono, direccion)
 VALUES ('Marc Pubill', 'pubill@gmail.com', '600200003', 'Barcelona');
 
 
--- =========================
--- INSERTS USUARIOS
--- =========================
 
 INSERT INTO usuarios (nombre, email, rol, password_hash)
 VALUES ('Javier Vega', 'javier@tienda.com', 'Administrador', 'pass1');
@@ -41,9 +35,7 @@ INSERT INTO usuarios (nombre, email, rol, password_hash)
 VALUES ('Ivan Bermejo', 'ivan@tienda.com', 'Administrador', 'pass2');
 
 
--- =========================
--- INSERTS PRODUCTOS
--- =========================
+
 
 INSERT INTO productos (nombre, marca, modelo, talla, color, precio, stock, categoria)
 VALUES ('Nike Air Max Plus TN', 'Nike', 'TN', 42, 'Negro', 189.99, 10, 'Lifestyle');
@@ -76,9 +68,7 @@ INSERT INTO productos (nombre, marca, modelo, talla, color, precio, stock, categ
 VALUES ('Jordan 1 High Chicago', 'Jordan', 'Jordan 1', 43, 'Rojo/Blanco', 319.99, 2, 'Basket');
 
 
--- =========================
--- INSERTS VENTAS
--- =========================
+
 
 INSERT INTO ventas (id_cliente, id_usuario, estado, total)
 VALUES (1, 1, 'Completada', 189.99);
@@ -96,9 +86,7 @@ INSERT INTO ventas (id_cliente, id_usuario, estado, total)
 VALUES (5, 1, 'Pendiente', 99.99);
 
 
--- =========================
--- INSERTS DETALLE_VENTA
--- =========================
+
 
 INSERT INTO detalle_venta (id_venta, id_producto, cantidad, precio_unitario)
 VALUES (1, 1, 1, 189.99);
@@ -118,9 +106,7 @@ VALUES (5, 5, 1, 99.99);
 COMMIT;
 
 
--- =========================
--- UPDATES CLIENTES
--- =========================
+
 
 UPDATE clientes
 SET telefono = '611111111'
@@ -143,9 +129,7 @@ SET direccion = 'Canarias'
 WHERE nombre = 'Pedri Gonzalez';
 
 
--- =========================
--- UPDATES PRODUCTOS
--- =========================
+
 
 UPDATE productos
 SET precio = 179.99
@@ -168,9 +152,6 @@ SET precio = 289.99
 WHERE modelo = 'Yeezy 350';
 
 
--- =========================
--- UPDATES VENTAS
--- =========================
 
 UPDATE ventas
 SET estado = 'Enviada'
@@ -195,9 +176,6 @@ WHERE id_venta = 5;
 COMMIT;
 
 
--- =========================
--- DELETES
--- =========================
 
 DELETE FROM detalle_venta
 WHERE id_detalle = 1;
@@ -215,4 +193,4 @@ DELETE FROM clientes
 WHERE nombre = 'Nahuel Molina';
 
 COMMIT;
--- Added extra seed rows for test coverage
+
