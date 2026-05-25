@@ -143,6 +143,16 @@ public class Menu {
 
             } else if (opcion == 4) {
 
+                List<Cliente> clientes = clienteController.listar();
+                if (clientes.isEmpty()) {
+                    System.out.println("No hay clientes para actualizar.");
+                    continue;
+                }
+                System.out.println("Clientes disponibles:");
+                for (Cliente c : clientes) {
+                    System.out.println("  ID: " + c.getIdCliente() + " | " + c.getNombre() + " | " + c.getEmail());
+                }
+
                 System.out.print("Escribe el ID del cliente que quieres actualizar: ");
                 try {
                     int id = Integer.parseInt(sc.nextLine());

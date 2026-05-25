@@ -35,6 +35,9 @@ public class ExportadorCSV {
 
     private static String sanitizar(String texto) {
         if (texto == null) return "";
-        return texto.replace(",", ";");
+        if (texto.contains(",") || texto.contains("\"") || texto.contains("\n")) {
+            return "\"" + texto.replace("\"", "\"\"") + "\"";
+        }
+        return texto;
     }
 }
