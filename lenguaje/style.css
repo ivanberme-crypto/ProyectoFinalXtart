@@ -139,6 +139,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -254,7 +255,7 @@ body {
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   display: none;
   justify-content: center;
   align-items: center;
@@ -390,10 +391,21 @@ body {
   padding: 35px 25px;
 }
 
-.stats-card--azul { border-left: 5px solid var(--azul); }
-.stats-card--verde { border-left: 5px solid var(--verde); }
-.stats-card--amarillo { border-left: 5px solid var(--amarillo); }
-.stats-card--rojo { border-left: 5px solid var(--rojo); }
+.stats-card--azul {
+  border-left: 5px solid var(--azul);
+}
+
+.stats-card--verde {
+  border-left: 5px solid var(--verde);
+}
+
+.stats-card--amarillo {
+  border-left: 5px solid var(--amarillo);
+}
+
+.stats-card--rojo {
+  border-left: 5px solid var(--rojo);
+}
 
 @media (max-width: 900px) {
   .dashboard-grid {
@@ -405,14 +417,18 @@ body {
   .header {
     padding: 15px;
   }
+
   .header__logo-img {
     width: 140px;
   }
+
   .main {
     padding: 15px;
   }
+
   .stats-card {
     padding: 20px;
   }
 }
+
 /* Improved responsive layout breakpoints for mobile */

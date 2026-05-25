@@ -412,4 +412,26 @@ renderUsuarios();
 updateCounts();
 actualizarAnchoVentana();
 mostrarFechaActual();
-// Added SessionStorage persistence for navigation state
+
+
+document.getElementById("buscador").addEventListener("input", function () {
+  const texto = this.value.toLowerCase().trim();
+  const seccionActiva = document.querySelector(".seccion:not(.seccion--oculta)");
+  if (!seccionActiva) return;
+
+  const filas = seccionActiva.querySelectorAll("tbody tr");
+  filas.forEach(fila => {
+    const contenido = fila.textContent.toLowerCase();
+    fila.style.display = contenido.includes(texto) ? "" : "none";
+  });
+});
+
+document.querySelectorAll(".header__btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const buscador = document.getElementById("buscador");
+    if (buscador) {
+      buscador.value = "";
+      document.querySelectorAll("tbody tr").forEach(f => f.style.display = "");
+    }
+  });
+});
